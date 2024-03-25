@@ -1,4 +1,6 @@
 Hotel Booking Project
+
+
 The platform will offer a user-friendly interface for both guests and administrators, ensuring efficient management of bookings and hotel information.
 
 User Use-Cases:
