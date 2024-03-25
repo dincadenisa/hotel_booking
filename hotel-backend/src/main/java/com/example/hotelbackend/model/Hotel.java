@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.List;
 
+/**
+ * Clasa care reprezintă un hotel în sistemul de rezervări.
+ */
 @Entity
 @Table(name = "hotel")
 public class Hotel {
@@ -32,15 +35,25 @@ public class Hotel {
     @Column(name = "rooms_count", nullable = false)
     private int roomsCount;
 
-
     @Column(name = "facilities")
     private List<String> facilities;
 
-
+    /**
+     * Constructor implicit pentru obiectul Hotel.
+     */
     public Hotel() {
-
+        // Constructor implicit necesar pentru JPA
     }
 
+    /**
+     * Constructor pentru obiectul Hotel cu parametri.
+     * @param name Numele hotelului.
+     * @param address Adresa hotelului.
+     * @param description Descrierea hotelului.
+     * @param rating Rating-ul hotelului.
+     * @param roomsCount Numărul de camere din hotel.
+     * @param facilities Lista de facilități ale hotelului.
+     */
     public Hotel(String name, String address, String description, double rating, int roomsCount, List<String> facilities) {
         this.name = name;
         this.address = address;
@@ -50,62 +63,22 @@ public class Hotel {
         this.facilities = facilities;
     }
 
+    // Getters și setters pentru toate câmpurile
+
+    /**
+     * Returnează ID-ul hotelului.
+     * @return ID-ul hotelului.
+     */
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Restul metodelor (getters și setters)
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public int getRoomsCount() {
-        return roomsCount;
-    }
-
-    public void setRoomsCount(int roomsCount) {
-        this.roomsCount = roomsCount;
-    }
-
-    public List<String> getFacilities() {
-        return facilities;
-    }
-
-    public void setFacilities(List<String> facilities) {
-        this.facilities = facilities;
-    }
-
+    /**
+     * Returnează o reprezentare sub formă de șir de caractere a obiectului Hotel.
+     * @return Șir de caractere care reprezintă obiectul Hotel.
+     */
     @Override
     public String toString() {
         return "Hotel{" +

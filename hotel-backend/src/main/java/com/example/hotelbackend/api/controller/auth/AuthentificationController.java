@@ -1,21 +1,68 @@
 package com.example.hotelbackend.api.controller.auth;
 
 import com.example.hotelbackend.api.model.RegistrationBody;
+import com.example.hotelbackend.exception.UserAlreadyExistsException;
 import com.example.hotelbackend.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlerul pentru autentificare.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthentificationController {
 
-    private UserService userService;
+    private final UserService userService;
 
+    /**
+     * Constructor pentru controlerul de autentificare.
+     * @param userService Serviciul pentru manipularea utilizatorilor.
+     */
     public AuthentificationController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * Endpoint pentru înregistrarea unui utilizator nou.
+     * @param registrationBody Informațiile de înregistrare ale utilizatorului.
+     * @return Răspunsul HTTP corespunzător.
+     */
     @PostMapping("/register")
-    public void registerUser(@RequestBody RegistrationBody registrationBody){
-        userService.registerUser(registrationBody);
+    public ResponseEntity<?> registerUser(@RequestBody RegistrationBody registrationBody) {
+        try {
+            userService.registerUser(registrationBody);
+            return ResponseEntity.ok().build();
+        } catch (UserAlreadyExistsException ex) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
+
+    /**
+     * Endpoint pentru ștergerea unui utilizator.
+     * @param registrationBody Informațiile de înregistrare ale utilizatorului.
+     */
+    @DeleteMapping("/delete")
+    public void deleteUser(@RequestBody RegistrationBody registrationBody) {
+        this.userService.deleteUser(registrationBody);
+    }
+
+    /**
+     * Endpoint pentru obținerea informațiilor despre un utilizator.
+     * @param registrationBody Informațiile de înregistrare ale utilizatorului.
+     */
+    @GetMapping("/get")
+    public void getUser(@RequestBody RegistrationBody registrationBody) {
+        this.userService.getUser(registrationBody);
+    }
+
+    /**
+     * Endpoint pentru actualizarea informațiilor unui utilizator.
+     * @param registrationBody Informațiile de înregistrare ale utilizatorului.
+     */
+    @PutMapping("/put")
+    public void putUser(@RequestBody RegistrationBody registrationBody) {
+        this.userService.putUser(registrationBody);
     }
 }

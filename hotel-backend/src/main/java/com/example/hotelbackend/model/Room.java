@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Clasa care reprezintă o cameră dintr-un hotel.
+ */
 @Entity
 @Table(name = "room")
 public class Room {
@@ -29,53 +32,49 @@ public class Room {
     @ManyToOne
     private Hotel hotel;
 
+    /**
+     * Constructor implicit pentru obiectul Room.
+     */
     public Room() {
         // Constructor implicit necesar pentru JPA
     }
 
+    /**
+     * Constructor pentru obiectul Room cu parametri.
+     * @param roomNumber Numărul camerei.
+     * @param type Tipul camerei.
+     * @param pricePerNight Prețul pe noapte al camerei.
+     */
     public Room(String roomNumber, String type, double pricePerNight) {
         this.roomNumber = roomNumber;
         this.type = type;
         this.pricePerNight = pricePerNight;
     }
 
+    // Getters și setters pentru toate câmpurile
+
+    /**
+     * Returnează ID-ul camerei.
+     * @return ID-ul camerei.
+     */
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Restul metodelor (getters și setters)
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public double getPricePerNight() {
-        return pricePerNight;
-    }
-
-    public void setPricePerNight(double pricePerNight) {
-        this.pricePerNight = pricePerNight;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
+    /**
+     * Returnează o reprezentare sub formă de șir de caractere a obiectului Room.
+     * @return Șir de caractere care reprezintă obiectul Room.
+     */
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", roomNumber='" + roomNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", pricePerNight=" + pricePerNight +
+                ", hotel=" + hotel +
+                '}';
     }
 }
