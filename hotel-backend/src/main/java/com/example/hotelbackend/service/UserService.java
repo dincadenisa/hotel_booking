@@ -6,6 +6,8 @@ import com.example.hotelbackend.model.User;
 import com.example.hotelbackend.model.dao.UserDAO;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Serviciu care gestionează operațiunile legate de utilizatori.
  */
@@ -37,13 +39,33 @@ public class UserService {
         user.setPassword(registrationBody.getPassword());
         return userDAO.save(user);
     }
-
+    /**
+     * Obține un utilizator pe baza datelor din corpul cererii.
+     * @param registrationBody Datele utilizatorului.
+     * @return Utilizatorul.
+     */
+    public User getUser(RegistrationBody registrationBody) {
+        User user = new User();
+        if(userDAO.findByUsernameIgnoreCase(registrationBody.getUsername()).isPresent()){
+            user = userDAO.findByUsernameIgnoreCase(registrationBody.getUsername()).get();
+        }else {
+            user = null;
+        }
+        return user;
+    }
     /**
      * Șterge un utilizator.
      * @param registrationBody Datele utilizatorului de șters.
+     *
      */
     public void deleteUser(RegistrationBody registrationBody) {
-        User user = getUser(registrationBody);
+        User user=new User();
+        user = getUser(registrationBody);
+//        user.setEmail(registrationBody.getEmail());
+//        user.setUsername(registrationBody.getUsername());
+//        user.setFirstName(registrationBody.getFirstName());
+//        user.setLastName(registrationBody.getLastName());
+//        user.setPassword(registrationBody.getPassword());
         userDAO.delete(user);
     }
 
@@ -54,26 +76,16 @@ public class UserService {
      */
     public User putUser(RegistrationBody registrationBody) {
         User user = getUser(registrationBody);
-        user.setEmail(registrationBody.getEmail());
-        user.setUsername(registrationBody.getUsername());
-        user.setFirstName(registrationBody.getFirstName());
-        user.setLastName(registrationBody.getLastName());
-        user.setPassword(registrationBody.getPassword());
+        if(user != null) {
+            user.setEmail(registrationBody.getEmail());
+            user.setUsername(registrationBody.getUsername());
+            user.setFirstName(registrationBody.getFirstName());
+            user.setLastName(registrationBody.getLastName());
+            user.setPassword(registrationBody.getPassword());
+        }
+        System.out.println(user.getEmail());
         return userDAO.save(user);
     }
 
-    /**
-     * Obține un utilizator pe baza datelor din corpul cererii.
-     * @param registrationBody Datele utilizatorului.
-     * @return Utilizatorul.
-     */
-    public User getUser(RegistrationBody registrationBody) {
-        User user = new User();
-        user.setEmail(registrationBody.getEmail());
-        user.setUsername(registrationBody.getUsername());
-        user.setFirstName(registrationBody.getFirstName());
-        user.setLastName(registrationBody.getLastName());
-        user.setPassword(registrationBody.getPassword());
-        return user;
-    }
+
 }

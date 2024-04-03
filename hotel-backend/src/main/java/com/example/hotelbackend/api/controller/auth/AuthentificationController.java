@@ -2,6 +2,7 @@ package com.example.hotelbackend.api.controller.auth;
 
 import com.example.hotelbackend.api.model.RegistrationBody;
 import com.example.hotelbackend.exception.UserAlreadyExistsException;
+import com.example.hotelbackend.model.User;
 import com.example.hotelbackend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,15 +47,18 @@ public class AuthentificationController {
     @DeleteMapping("/delete")
     public void deleteUser(@RequestBody RegistrationBody registrationBody) {
         this.userService.deleteUser(registrationBody);
+
     }
 
     /**
      * Endpoint pentru obținerea informațiilor despre un utilizator.
+     *
      * @param registrationBody Informațiile de înregistrare ale utilizatorului.
+     * @return
      */
     @GetMapping("/get")
-    public void getUser(@RequestBody RegistrationBody registrationBody) {
-        this.userService.getUser(registrationBody);
+    public User getUser(@RequestBody RegistrationBody registrationBody) {
+        return this.userService.getUser(registrationBody);
     }
 
     /**
