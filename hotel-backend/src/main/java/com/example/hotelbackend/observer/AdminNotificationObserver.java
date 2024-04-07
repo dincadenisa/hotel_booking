@@ -13,6 +13,12 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * An observer for admin notifications, specifically focusing on user registration events.
+ * This component is part of the observer pattern implementation within the application.
+ * It listens for updates about new user registrations and notifies administrators via email.
+ */
+
 @Component
 public class AdminNotificationObserver implements Observer {
 
