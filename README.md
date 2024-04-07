@@ -80,7 +80,7 @@ Database Diagram:
 ![diagrama](https://github.com/dincadenisa/hotel_booking/assets/126794370/5fd4bc4c-b46b-48af-96bf-decb783a9512)
 
 
-# Endpoints
+## Endpoints
 
 In the hotel management system, several key endpoints play pivotal roles in facilitating the operations and interactions between the users and the system. Here's an overview of the endpoints developed and their functionalities:
 
@@ -122,7 +122,7 @@ This functionality enables the retrieval of admin details. It requires an AdminR
 Update Admin Information (PUT /admin/auth/update)
 The update endpoint facilitates the modification of existing admin details. Admins can update their information through an AdminRegistrationBody. This capability is vital for dynamic admin data management, accommodating changes in admin roles, permissions, or personal details.
 
-# Observer Pattern
+## Observer Pattern
 
 The Observer Pattern is a software design pattern in which an object, named the subject, maintains a list of its dependents, called observers, and notifies them of any state changes, typically by calling one of their methods. It is primarily used to implement distributed event handling systems, in a manner that is decoupled between the object whose state is being observed (the subject) and the objects that need to be notified upon the state change (the observers).
 
