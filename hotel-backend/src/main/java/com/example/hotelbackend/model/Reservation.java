@@ -9,9 +9,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
 
-/**
- * Clasa care reprezintă o rezervare a unei camere de hotel.
- */
 @Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -33,39 +30,56 @@ public class Reservation {
     @ManyToOne
     private User user;
 
-    /**
-     * Constructor implicit pentru obiectul Reservation.
-     */
     public Reservation() {
-        // Constructor implicit necesar pentru JPA
     }
 
-    /**
-     * Constructor pentru obiectul Reservation cu parametri.
-     * @param checkInDate Data de check-in pentru rezervare.
-     * @param checkOutDate Data de check-out pentru rezervare.
-     */
-    public Reservation(Date checkInDate, Date checkOutDate) {
+    public Reservation(Date checkInDate, Date checkOutDate, Room room, User user) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
+        this.room = room;
+        this.user = user;
     }
 
-    // Getters și setters pentru toate câmpurile
-
-    /**
-     * Returnează ID-ul rezervării.
-     * @return ID-ul rezervării.
-     */
     public Long getId() {
         return id;
     }
 
-    // Restul metodelor (getters și setters)
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    /**
-     * Returnează o reprezentare sub formă de șir de caractere a obiectului Reservation.
-     * @return Șir de caractere care reprezintă obiectul Reservation.
-     */
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
