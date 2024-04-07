@@ -37,22 +37,10 @@ public class Admin {
     @Column(name = "role", nullable = false)
     private String role;
 
-    /**
-     * Constructor implicit pentru obiectul Admin.
-     */
     public Admin() {
         // Constructor implicit necesar pentru JPA
     }
 
-    /**
-     * Constructor pentru obiectul Admin cu parametri.
-     * @param username Numele de utilizator al administratorului.
-     * @param password Parola administratorului.
-     * @param email Adresa de email a administratorului.
-     * @param firstName Prenumele administratorului.
-     * @param lastName Numele administratorului.
-     * @param role Rolul administratorului în sistem.
-     */
     public Admin(String username, String password, String email, String firstName, String lastName, String role) {
         this.username = username;
         this.password = password;
@@ -62,22 +50,64 @@ public class Admin {
         this.role = role;
     }
 
-    // Getters și setters pentru toate câmpurile
-
-    /**
-     * Returnează ID-ul administratorului.
-     * @return ID-ul administratorului.
-     */
+    // Getters
     public Long getId() {
         return id;
     }
 
-    // Restul metodelor (getters și setters)
+    public String getUsername() {
+        return username;
+    }
 
-    /**
-     * Returnează o reprezentare sub formă de șir de caractere a obiectului Admin.
-     * @return Șir de caractere care reprezintă obiectul Admin.
-     */
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Admin{" +
