@@ -129,13 +129,17 @@ The Observer Pattern is a software design pattern in which an object, named the 
 In the context of the provided classes, the Observer Pattern is used to notify admins via email whenever a new user registers. This is an efficient way to keep the administration informed about user activities without requiring them to constantly check the system for updates. Here’s a breakdown of how the Observer Pattern is implemented in these classes:
 
 Observer Interface
+
 This defines a common interface for all observers, ensuring they implement the update(User user) method. When notified, observers will execute this method, which encapsulates the reaction to the notification, in this case, sending an email to the admin.
 
 AdminNotificationObserver Class
+
 Implements the Observer interface. This class is responsible for sending email notifications to the admin whenever it is updated with a new user registration. It utilizes JavaMail API properties for configuring the email session and sends out the email using SMTP protocol. The update method here specifically builds and sends an email to a predetermined admin email address whenever it's invoked.
 
 Subject Interface
+
 Defines the operations for attaching, detaching, and notifying observers. It’s a crucial part of the pattern, allowing the subject to manage its observers. The implementation of this interface (not fully shown) would handle the registration and deregistration of observers and notify them of changes.
 
 ObserverConfig Class
+
 This class uses dependency injection to bring together the UserService (acting as the subject) and the AdminNotificationObserver (an observer). It automatically registers the AdminNotificationObserver with the UserService upon initialization, leveraging the @PostConstruct annotation. This setup ensures that the observer is ready to receive updates as soon as the application starts.
