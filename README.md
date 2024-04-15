@@ -136,10 +136,6 @@ AdminNotificationObserver Class
 
 Implements the Observer interface. This class is responsible for sending email notifications to the admin whenever it is updated with a new user registration. It utilizes JavaMail API properties for configuring the email session and sends out the email using SMTP protocol. The update method here specifically builds and sends an email to a predetermined admin email address whenever it's invoked.
 
-Subject Interface
-
-Defines the operations for attaching, detaching, and notifying observers. It’s a crucial part of the pattern, allowing the subject to manage its observers. The implementation of this interface (not fully shown) would handle the registration and deregistration of observers and notify them of changes.
-
 ObserverConfig Class
 
 This class uses dependency injection to bring together the UserService (acting as the subject) and the AdminNotificationObserver (an observer). It automatically registers the AdminNotificationObserver with the UserService upon initialization, leveraging the @PostConstruct annotation. This setup ensures that the observer is ready to receive updates as soon as the application starts.
