@@ -56,10 +56,10 @@ public class UserService {
      * @throws UserAlreadyExistsException If the user already exists.
      */
     public User registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException {
-        if (userDAO.findByEmailIgnoreCase(registrationBody.getEmail()).isPresent() ||
-                userDAO.findByUsernameIgnoreCase(registrationBody.getUsername()).isPresent()) {
-            throw new UserAlreadyExistsException();
-        }
+//        if (userDAO.findByEmailIgnoreCase(registrationBody.getEmail()).isPresent() ||
+//                userDAO.findByUsernameIgnoreCase(registrationBody.getUsername()).isPresent()) {
+//            throw new UserAlreadyExistsException();
+//        }
 
         User newUser = new User();
         newUser.setEmail(registrationBody.getEmail());

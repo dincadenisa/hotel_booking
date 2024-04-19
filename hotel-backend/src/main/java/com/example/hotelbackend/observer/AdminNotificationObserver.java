@@ -23,7 +23,7 @@ import java.util.Properties;
 public class AdminNotificationObserver implements Observer {
 
     @Override
-    public void update(User user) {
+    public void  update(User user) {
         final String username = "dincadenisa33@yahoo.com"; // Replace with your Yahoo email
         final String password = "alnoharcsdkndqhn"; // Replace with your Yahoo password
 
