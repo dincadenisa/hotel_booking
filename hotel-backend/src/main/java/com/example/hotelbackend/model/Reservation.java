@@ -27,17 +27,29 @@ public class Reservation {
     @ManyToOne
     private Room room;
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    @ManyToOne
+    private Hotel hotel;
+
     @ManyToOne
     private User user;
 
     public Reservation() {
     }
 
-    public Reservation(Date checkInDate, Date checkOutDate, Room room, User user) {
+    public Reservation(Date checkInDate, Date checkOutDate, Room room, User user,Hotel hotel) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.room = room;
         this.user = user;
+        this.hotel=hotel;
     }
 
     public Long getId() {

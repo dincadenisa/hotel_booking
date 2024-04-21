@@ -1,86 +1,132 @@
 package com.example.hotelbackend.api.model;
 
-import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.Date;
 
 /**
- * Represents the body of a request to register a new reservation.
+ * Class representing the reservation data sent in the request body.
  */
 public class ReservationRegistrationBody {
+    @NotNull
+    private Long hotelId;
 
-    @NotNull(message = "User ID is required")
-    private Long userId;
-
-    @NotNull(message = "Room ID is required")
+    @NotNull
     private Long roomId;
 
-    @NotNull(message = "Check-in date is required")
-    @FutureOrPresent(message = "Check-in date must be in the future or present")
+    @NotNull
+    private String username;
+
+    @NotEmpty
+    private String roomNumber;
+
+    @NotNull
     private Date checkInDate;
 
-    @NotNull(message = "Check-out date is required")
-    @FutureOrPresent(message = "Check-out date must be after check-in date")
+    @NotNull
     private Date checkOutDate;
 
-    /**
-     * Default constructor for JSON parsing.
-     */
-    public ReservationRegistrationBody() {
-    }
+    @NotEmpty
+    private String guestName;
 
     /**
-     * Full constructor for creating an instance of ReservationRegistrationBody.
+     * Gets the hotel ID.
+     * @return The hotel ID.
      */
-    public ReservationRegistrationBody(Long userId, Long roomId, Date checkInDate, Date checkOutDate) {
-        this.userId = userId;
-        this.roomId = roomId;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
+    public Long getHotelId() {
+        return hotelId;
     }
 
-    // Getters and setters
-
-    public Long getUserId() {
-        return userId;
+    /**
+     * Sets the hotel ID.
+     * @param hotelId The hotel ID to set.
+     */
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public String getUsername() {
+        return username;
+    }
+
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Long getRoomId() {
         return roomId;
     }
 
+    /**
+     * Sets the hotel ID.
+     * @param roomId The hotel ID to set.
+     */
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
 
+    /**
+     * Gets the room number.
+     * @return The room number.
+     */
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    /**
+     * Sets the room number.
+     * @param roomNumber The room number to set.
+     */
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    /**
+     * Gets the check-in date.
+     * @return The check-in date.
+     */
     public Date getCheckInDate() {
         return checkInDate;
     }
 
+    /**
+     * Sets the check-in date.
+     * @param checkInDate The check-in date to set.
+     */
     public void setCheckInDate(Date checkInDate) {
         this.checkInDate = checkInDate;
     }
 
+    /**
+     * Gets the check-out date.
+     * @return The check-out date.
+     */
     public Date getCheckOutDate() {
         return checkOutDate;
     }
 
+    /**
+     * Sets the check-out date.
+     * @param checkOutDate The check-out date to set.
+     */
     public void setCheckOutDate(Date checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
-    @Override
-    public String toString() {
-        return "ReservationRegistrationBody{" +
-                "userId=" + userId +
-                ", roomId=" + roomId +
-                ", checkInDate=" + checkInDate +
-                ", checkOutDate=" + checkOutDate +
-                '}';
+    /**
+     * Gets the guest name.
+     * @return The guest name.
+     */
+    public String getGuestName() {
+        return guestName;
+    }
+
+    /**
+     * Sets the guest name.
+     * @param guestName The guest name to set.
+     */
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
     }
 }
