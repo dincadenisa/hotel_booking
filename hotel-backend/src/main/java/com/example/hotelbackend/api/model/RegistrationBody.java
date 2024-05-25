@@ -15,7 +15,10 @@ public class RegistrationBody {
     /**
      * Obține numele de utilizator.
      * @return Numele de utilizator.
+     *
      */
+
+
     public String getUsername() {
         return username;
     }

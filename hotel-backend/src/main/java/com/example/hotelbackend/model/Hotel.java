@@ -73,7 +73,70 @@ public class Hotel {
         return id;
     }
 
-    // Restul metodelor (getters și setters)
+    // ID Setter
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // Name Getter
+    public String getName() {
+        return name;
+    }
+
+    // Name Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Address Getter
+    public String getAddress() {
+        return address;
+    }
+
+    // Address Setter
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    // Description Getter
+    public String getDescription() {
+        return description;
+    }
+
+    // Description Setter
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    // Rating Getter
+    public double getRating() {
+        return rating;
+    }
+
+    // Rating Setter
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    // RoomsCount Getter
+    public int getRoomsCount() {
+        return roomsCount;
+    }
+
+    // RoomsCount Setter
+    public void setRoomsCount(int roomsCount) {
+        this.roomsCount = roomsCount;
+    }
+
+    // Facilities Getter
+    public List<String> getFacilities() {
+        return facilities;
+    }
+
+    // Facilities Setter
+    public void setFacilities(List<String> facilities) {
+        this.facilities = facilities;
+    }
 
     /**
      * Returnează o reprezentare sub formă de șir de caractere a obiectului Hotel.
