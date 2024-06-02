@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
+import './ReservationPage.css'; // Import the CSS file
 
 const ReservationPage = () => {
   const { roomId } = useParams();
+  const location = useLocation();
+  const pricePerNight = location.state.room.pricePerNight;
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -15,7 +19,6 @@ const ReservationPage = () => {
     const end = new Date(endDate);
     const diffTime = Math.abs(end - start);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const pricePerNight = 250; // Replace with actual price logic if needed
     return diffDays * pricePerNight;
   };
 
@@ -34,9 +37,9 @@ const ReservationPage = () => {
   };
 
   return (
-    <div>
+    <div className="reservation-container">
       <h1>Reservation for Room {roomId}</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="reservation-form" onSubmit={handleSubmit}>
         <div>
           <label>First Name:</label>
           <input

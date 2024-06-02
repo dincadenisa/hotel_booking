@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './HomePage.css'; // Make sure to create and import the CSS file for styling
 import RoomCard from '../HelpingComponents/RoomCard';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const [rooms, setRooms] = useState([]);
+  const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    alert('Button clicked!');
+  const handleButtonClick = (roomId, room) => {
+    navigate(`/homepage/${roomId}`, { state: { room } });
   };
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const HomePage = () => {
                 roomName={room.id}
                 description={room.hotel.description}
                 price={room.pricePerNight}
-                onButtonClick={handleButtonClick}
+                onButtonClick={() => handleButtonClick(room.id, room)}
               />
             </div>
           </li>
