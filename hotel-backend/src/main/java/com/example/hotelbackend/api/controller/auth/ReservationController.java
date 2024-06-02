@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Controller for reservation management.
  */
@@ -81,4 +83,11 @@ public class ReservationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reservation not found.");
         }
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Reservation>> getAllReservations() {
+        List<Reservation> reservations = reservationService.getAllReservations();
+        return ResponseEntity.ok(reservations);
+    }
+
 }

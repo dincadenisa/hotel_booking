@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import './AdminPage.css';
 
 const AdminPage = () => {
-  const handlePlaceholderClick = (e) => {
-    e.preventDefault();
-    alert('This feature is coming soon!');
-  };
-
   return (
     <div className="admin-wrapper">
       <div className="admin-header">
@@ -21,12 +16,16 @@ const AdminPage = () => {
             <Link to="/admin/manage-users">Manage Users</Link>
           </li>
           <li>
-            <Link to="#" onClick={handlePlaceholderClick}>
-              View Reports
-            </Link>
+            <Link to="/admin/view-reservations">View Reservations</Link>
           </li>
           <li>
-            <Link to="#" onClick={handlePlaceholderClick}>
+            <Link
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                alert('This feature is coming soon!');
+              }}
+            >
               Settings
             </Link>
           </li>

@@ -13,6 +13,7 @@ import com.example.hotelbackend.model.dao.ReservationDAO;
 import com.example.hotelbackend.api.model.RegistrationBody;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -129,6 +130,10 @@ public class ReservationService {
         reservation.setNumberOfPersons(registrationBody.getNumberOfPersons());
 
         return reservationDAO.save(reservation);
+    }
+
+    public List<Reservation> getAllReservations() {
+        return reservationDAO.findAll();
     }
 
 }
