@@ -4,9 +4,15 @@ import com.example.hotelbackend.api.model.AdminRegistrationBody;
 import com.example.hotelbackend.exception.AdminAlreadyExistsException;
 import com.example.hotelbackend.model.Admin;
 import com.example.hotelbackend.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Controller for admin authentication and management.
@@ -16,13 +22,12 @@ import org.springframework.web.bind.annotation.*;
 public class AdminAuthentificationController {
 
     private final AdminService adminService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    /**
-     * Constructor for the admin authentication controller.
-     * @param adminService The service for handling admin operations.
-     */
-    public AdminAuthentificationController(AdminService adminService) {
+    @Autowired
+    public AdminAuthentificationController(AdminService adminService, BCryptPasswordEncoder passwordEncoder) {
         this.adminService = adminService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -41,8 +46,25 @@ public class AdminAuthentificationController {
     }
 
     /**
+     * Endpoint for admin login.
+     * @param loginBody The login information for the admin.
+     * @return The corresponding HTTP response.
+     */
+    @PostMapping("/login")
+    public ResponseEntity<?> loginAdmin(@RequestBody AdminRegistrationBody loginBody) {
+        Admin admin = adminService.getAdmin(loginBody).orElse(null);
+        if (admin != null && passwordEncoder.matches(loginBody.getPassword(), admin.getPassword())) {
+            Map<String, String> response = new HashMap<>();
+            response.put("role", "ADMIN");
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
+    }
+
+    /**
      * Endpoint for deleting an admin.
      * @param registrationBody The registration information of the admin to be deleted.
+     * @return The corresponding HTTP response.
      */
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteAdmin(@RequestBody AdminRegistrationBody registrationBody) {

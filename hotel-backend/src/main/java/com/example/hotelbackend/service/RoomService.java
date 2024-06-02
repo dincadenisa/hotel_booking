@@ -5,9 +5,11 @@ import com.example.hotelbackend.exception.HotelAlreadyExistsException;
 import com.example.hotelbackend.exception.RoomAlreadyExistsException;
 import com.example.hotelbackend.model.Hotel;
 import com.example.hotelbackend.model.Room;
+import com.example.hotelbackend.model.User;
 import com.example.hotelbackend.model.dao.RoomDAO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -60,6 +62,12 @@ public class RoomService {
     public Optional<Room> getRoomById(Long id) {
         return roomDAO.findById(id);
     }
+
+
+    public List<Room> getAllRooms() {
+        return roomDAO.findAll();
+    }
+
 
     /**
      * Updates a room's details based on the provided registration body and ID.

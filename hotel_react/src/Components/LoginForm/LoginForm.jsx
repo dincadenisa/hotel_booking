@@ -1,7 +1,10 @@
+// src/Components/LoginForm/LoginForm.jsx
 import React, { useState } from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import UserService from '../../Services/UserService';
+import AdminService from '../../Services/AdminService';
 
 const LoginForm = () => {
   console.log('LoginForm component is being rendered');
@@ -13,26 +16,32 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log('handleLogin function called');
+
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-        credentials: 'include', // Ensure cookies are sent and received
-      });
-      if (response.ok) {
-        console.log('Login successful, navigating to homepage');
+      // Attempt to login as user
+      const userResponse = await UserService.login({ username, password });
+      if (userResponse.data.role === 'USER') {
+        console.log('User login successful, navigating to homepage');
         navigate('/homepage');
-      } else {
-        console.log('Failed to login');
-        alert('Failed to login');
+        return;
       }
     } catch (error) {
-      console.error('Failed to login', error);
+      console.error('Failed to login as user', error);
     }
+
+    try {
+      // Attempt to login as admin
+      const adminResponse = await AdminService.login({ username, password });
+      if (adminResponse.data.role === 'ADMIN') {
+        console.log('Admin login successful, navigating to admin page');
+        navigate('/admin');
+        return;
+      }
+    } catch (error) {
+      console.error('Failed to login as admin', error);
+    }
+
+    alert('Failed to login');
   };
 
   return (

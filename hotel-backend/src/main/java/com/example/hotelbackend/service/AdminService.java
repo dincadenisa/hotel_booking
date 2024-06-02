@@ -4,6 +4,7 @@ import com.example.hotelbackend.api.model.AdminRegistrationBody;
 import com.example.hotelbackend.exception.AdminAlreadyExistsException;
 import com.example.hotelbackend.model.Admin;
 import com.example.hotelbackend.model.dao.AdminDAO;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,9 +16,11 @@ import java.util.Optional;
 public class AdminService {
 
     private final AdminDAO adminDAO;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public AdminService(AdminDAO adminDAO) {
+    public AdminService(AdminDAO adminDAO, BCryptPasswordEncoder passwordEncoder) {
         this.adminDAO = adminDAO;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -36,7 +39,7 @@ public class AdminService {
         admin.setUsername(registrationBody.getUsername());
         admin.setFirstName(registrationBody.getFirstName());
         admin.setLastName(registrationBody.getLastName());
-        admin.setPassword(registrationBody.getPassword());
+        admin.setPassword(passwordEncoder.encode(registrationBody.getPassword())); // Hash the password
         admin.setRole(registrationBody.getRole());
         return adminDAO.save(admin);
     }
@@ -71,11 +74,10 @@ public class AdminService {
             admin.setUsername(registrationBody.getUsername());
             admin.setFirstName(registrationBody.getFirstName());
             admin.setLastName(registrationBody.getLastName());
-            admin.setPassword(registrationBody.getPassword());
+            admin.setPassword(passwordEncoder.encode(registrationBody.getPassword())); // Hash the password if it's being updated
             admin.setRole(registrationBody.getRole());
             return adminDAO.save(admin);
         }
-        // Ideally, you might throw an exception or handle the case where the admin doesn't exist.
-        return null; // Or consider throwing a custom exception.
+        return null; // Or consider throwing a custom exception if the admin doesn't exist
     }
 }

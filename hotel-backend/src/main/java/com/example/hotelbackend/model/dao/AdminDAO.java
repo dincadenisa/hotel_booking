@@ -2,9 +2,10 @@ package com.example.hotelbackend.model.dao;
 
 import com.example.hotelbackend.model.Admin;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface AdminDAO extends CrudRepository<Admin, Long> {
+public interface AdminDAO extends JpaRepository<Admin, Long> {
     /**
      * Finds an admin by username, ignoring case.
      *

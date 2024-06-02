@@ -10,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthentificationController {
@@ -37,36 +41,31 @@ public class AuthentificationController {
     public ResponseEntity<?> loginUser(@RequestBody RegistrationBody loginBody) {
         User user = userService.getUser(loginBody);
         if (user != null && passwordEncoder.matches(loginBody.getPassword(), user.getPassword())) {
-            return ResponseEntity.ok("Login Successful");
+            Map<String, String> response = new HashMap<>();
+            response.put("role", "USER");
+            return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteUser(@RequestBody RegistrationBody registrationBody) {
-        User user = userService.getUser(registrationBody);
-        if (user != null) {
-            userService.deleteUser(registrationBody);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
-
-    @GetMapping("/get")
-    public ResponseEntity<?> getUser(@RequestBody RegistrationBody registrationBody) {
-        User user = userService.getUser(registrationBody);
-        if (user != null) {
-            return ResponseEntity.ok(user);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/put")
-    public ResponseEntity<?> putUser(@RequestBody RegistrationBody registrationBody) {
-        User updatedUser = userService.putUser(registrationBody);
+    public ResponseEntity<?> putUser(@RequestBody User user) {
+        User updatedUser = userService.updateUser(user);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.findAllUsers();
+        return ResponseEntity.ok(users);
     }
 }

@@ -21,10 +21,12 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())  // Disable CSRF for simplicity, configure as needed
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/register", "/auth/login").permitAll()  // Allow access to these endpoints
+                        .requestMatchers("/auth/register", "/auth/login", "/admin/auth/register", "/admin/auth/login","/auth/users", "/auth/delete/{id}","/auth/put","/room/allrooms").permitAll()  // Allow access to these endpoints
                         .anyRequest().authenticated()  // All other requests require authentication
                 )
                 .httpBasic(httpBasic -> {});  // Enable HTTP Basic authentication
         return http.build();
     }
+
+
 }

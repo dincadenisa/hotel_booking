@@ -19,9 +19,14 @@ const updateUser = (userData) => {
   return axios.put(`${API_URL}put`, userData);
 };
 
+const login = (userData) => {
+  return axios.post(`${API_URL}login`, userData);
+};
+
 export default {
   register,
   getUser,
   deleteUser,
   updateUser,
+  login,
 };

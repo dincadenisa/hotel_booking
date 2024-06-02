@@ -1,11 +1,12 @@
 package com.example.hotelbackend.model.dao;
 
 import com.example.hotelbackend.model.Room;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface RoomDAO extends CrudRepository<Room, Long> {
+public interface RoomDAO extends JpaRepository<Room,Long> {
     /**
      * Finds a room by its room number, ignoring case.
      * @param roomNumber The room number to search for.

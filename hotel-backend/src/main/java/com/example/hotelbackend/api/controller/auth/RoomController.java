@@ -4,10 +4,14 @@ import com.example.hotelbackend.api.model.RoomRegistrationBody;
 import com.example.hotelbackend.exception.HotelAlreadyExistsException;
 import com.example.hotelbackend.exception.RoomAlreadyExistsException;
 import com.example.hotelbackend.model.Room;
+import com.example.hotelbackend.model.User;
 import com.example.hotelbackend.service.RoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.List;
 
 /**
  * Controller for room management.
@@ -63,6 +67,14 @@ public class RoomController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/allrooms")
+    public ResponseEntity<List<Room>> getAllRooms() {
+        List<Room>  rooms= roomService.getAllRooms();
+        return ResponseEntity.ok(rooms);
+    }
+
+
 
     /**
      * Endpoint for updating a room's information.

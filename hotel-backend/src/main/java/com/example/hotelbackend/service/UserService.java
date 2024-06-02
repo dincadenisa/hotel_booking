@@ -4,23 +4,39 @@ import com.example.hotelbackend.api.model.RegistrationBody;
 import com.example.hotelbackend.exception.UserAlreadyExistsException;
 import com.example.hotelbackend.model.User;
 import com.example.hotelbackend.model.dao.UserDAO;
-import com.example.hotelbackend.observer.AdminNotificationObserver;
+import com.example.hotelbackend.observer.Observer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
 
     private final UserDAO userDAO;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final List<Observer> observers = new ArrayList<>();
 
     @Autowired
     public UserService(UserDAO userDAO, BCryptPasswordEncoder passwordEncoder) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public void attach(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void detach(Observer observer) {
+        observers.remove(observer);
+    }
+
+    private void notifyObservers(User user) {
+        for (Observer observer : observers) {
+            observer.update(user);
+        }
     }
 
     public User registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException {
@@ -36,31 +52,27 @@ public class UserService {
         newUser.setLastName(registrationBody.getLastName());
         newUser.setPassword(passwordEncoder.encode(registrationBody.getPassword()));
 
-        return userDAO.save(newUser);
+        User savedUser = userDAO.save(newUser);
+        notifyObservers(savedUser);
+        return savedUser;
     }
 
     public User getUser(RegistrationBody registrationBody) {
         return userDAO.findByUsernameIgnoreCase(registrationBody.getUsername()).orElse(null);
     }
 
-    public void deleteUser(RegistrationBody registrationBody) {
-        userDAO.findByUsernameIgnoreCase(registrationBody.getUsername())
-                .ifPresent(userDAO::delete);
+    public void deleteUserById(Long id) {
+        userDAO.deleteById(id);
     }
 
-    public User putUser(RegistrationBody registrationBody) {
-        User existingUser = getUser(registrationBody);
-        if (existingUser != null) {
-            existingUser.setEmail(registrationBody.getEmail());
-            existingUser.setUsername(registrationBody.getUsername());
-            existingUser.setFirstName(registrationBody.getFirstName());
-            existingUser.setLastName(registrationBody.getLastName());
-            existingUser.setPassword(passwordEncoder.encode(registrationBody.getPassword()));
-            return userDAO.save(existingUser);
+    public User updateUser(User user) {
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        return null;
+        return userDAO.save(user);
     }
 
-    public void attach(AdminNotificationObserver adminNotificationObserver) {
+    public List<User> findAllUsers() {
+        return userDAO.findAll();
     }
 }
