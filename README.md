@@ -9,6 +9,7 @@ The Hotel Booking Project is designed to cover a wide range of functionalities, 
 ![umlhotel](https://github.com/dincadenisa/hotel_booking/assets/126794370/4415b330-663b-4a22-83e5-408d4951bc59)
 
 ### Use Case Descriptions
+<<<<<<< HEAD
 
 ![usecase](https://github.com/dincadenisa/hotel_booking/assets/126794370/8d45971b-04cc-4ffd-9d23-d04036855f87)
 
@@ -74,6 +75,66 @@ The Hotel Booking Project is designed to cover a wide range of functionalities, 
    - **Description:** Admins can manage user accounts by viewing user details, updating user information, and deleting user accounts as necessary.
    - **Steps:**
 
+=======
+![usecase](https://github.com/dincadenisa/hotel_booking/assets/126794370/8d45971b-04cc-4ffd-9d23-d04036855f87)
+
+#### User Use Cases
+
+1. **Register**
+   - **Description:** Users can create a new account by providing necessary details such as username, email, password, and other personal information. This process ensures that users have a unique identity within the system.
+   - **Steps:**
+     1. The user accesses the registration page.
+     2. The user fills out the registration form with the required information.
+     3. The system validates the information and creates a new user account.
+     4. The user receives a confirmation message upon successful registration.
+
+2. **Log In**
+   - **Description:** Users can log in to their accounts using their registered email or username and password. This allows them to access personalized features such as booking history and account management.
+   - **Steps:**
+     1. The user navigates to the login page.
+     2. The user enters their email/username and password.
+     3. The system verifies the credentials.
+     4. Upon successful authentication, the user is redirected to the homepage or dashboard.
+
+3. **Choose Room**
+   - **Description:** Users can browse through available rooms based on their preferences such as room type, price range, and amenities. They can view detailed descriptions and images of each room.
+   - **Steps:**
+     1. The user searches for rooms using filters like location, dates, and price.
+     2. The system displays a list of available rooms matching the criteria.
+     3. The user selects a room to view more details.
+     4. The user confirms their choice by selecting the room for booking.
+
+4. **Enter Details for Booking**
+   - **Description:** Users enter booking details such as check-in and check-out dates, number of guests, and personal information to complete the reservation process.
+   - **Steps:**
+     1. The user provides check-in and check-out dates.
+     2. The user enters the number of guests.
+     3. The user fills out personal information required for the booking.
+     4. The system calculates the total cost and presents a summary for confirmation.
+
+5. **Book Room**
+   - **Description:** Users confirm their booking details and proceed to make a reservation. The system saves the booking information and generates a booking confirmation.
+   - **Steps:**
+     1. The user reviews the booking summary.
+     2. The user confirms the booking and submits the reservation.
+     3. The system processes the booking and stores it in the database.
+     4. The user receives a booking confirmation and details via email.
+
+#### Admin Use Cases
+
+1. **Log In**
+   - **Description:** Admins can log in to the system using their credentials to manage users and reservations.
+   - **Steps:**
+     1. The admin navigates to the login page.
+     2. The admin enters their username and password.
+     3. The system verifies the credentials.
+     4. Upon successful authentication, the admin is redirected to the admin dashboard.
+
+2. **View, Update, and Delete Users**
+   - **Description:** Admins can manage user accounts by viewing user details, updating user information, and deleting user accounts as necessary.
+   - **Steps:**
+
+>>>>>>> f1e72ffc0939f20551054eb05b09c9704fc615af
      1. The admin accesses the user management section.
      2. The admin views a list of all users.
      3. The admin selects a user to view detailed information.
@@ -97,6 +158,7 @@ In the hotel management system, several key endpoints play pivotal roles in faci
 ### Hotel Endpoints
 
 - **Hotel Registration (POST /hotel/register)**:
+<<<<<<< HEAD
 
   - This endpoint is designed for registering new hotels within the system. It accepts details such as the hotel's name, address, description, rating, rooms count, and facilities through a `HotelRegistrationBody`. This information is used to create a new hotel entry in the database. If a hotel with the same name already exists, it throws a `HotelAlreadyExistsException`, ensuring unique entries.
 
@@ -140,6 +202,42 @@ In the hotel management system, several key endpoints play pivotal roles in faci
 
 - **Retrieve Admin Information (GET /admin/auth/get)**:
 
+=======
+  - This endpoint is designed for registering new hotels within the system. It accepts details such as the hotel's name, address, description, rating, rooms count, and facilities through a `HotelRegistrationBody`. This information is used to create a new hotel entry in the database. If a hotel with the same name already exists, it throws a `HotelAlreadyExistsException`, ensuring unique entries.
+
+- **Hotel Deletion (DELETE /hotel/delete/{id})**:
+  - The hotel deletion endpoint allows for the removal of a hotel from the system based on its unique identifier (id). This operation is crucial for maintaining an up-to-date listing of active hotels and removing those that are no longer operational or part of the hotel chain.
+
+- **Fetch Hotel Details (GET /hotel/get/{id})**:
+  - This endpoint retrieves the details of a specific hotel by its ID. It serves as a crucial feature for both administrators and customers, allowing them to view comprehensive information about a hotel, including its amenities, rooms, and services. If no hotel is found with the given ID, it returns a not found response, indicating the absence of such an entry in the system.
+
+- **Hotel Update (PUT /hotel/update/{id})**:
+  - The hotel update endpoint allows for modifying the details of an existing hotel. It requires the hotel's ID for identification and a `HotelRegistrationBody` with the new details to be updated. This feature is essential for keeping hotel information current, reflecting changes in services, facilities, or operational details.
+
+### User Endpoints
+
+- **User Registration (POST /auth/register)**:
+  - This endpoint focuses on the registration of new users into the system. It leverages a `RegistrationBody` containing user details like name, email, and password. Upon successful registration, it returns an HTTP OK response. If an attempt is made to register a user that already exists, a `UserAlreadyExistsException` is thrown, resulting in an HTTP CONFLICT response, thus ensuring user uniqueness.
+
+- **User Deletion (DELETE /auth/delete)**:
+  - The deletion endpoint allows for the removal of a user from the system based on the provided `RegistrationBody`, which includes identification details such as the user's email or username. This functionality is crucial for users who wish to remove their accounts from the platform, catering to privacy and data management standards.
+
+- **Fetch User Details (GET /auth/get)**:
+  - Retrieving user information is facilitated through this endpoint, which requires a `RegistrationBody` for identification. This operation is essential for profile management and customization, enabling users to view and verify their stored information within the system.
+
+- **Update User Information (PUT /auth/put)**:
+  - The update endpoint serves to modify existing user details. Users can update their information such as name, email, or password through a `RegistrationBody`. This feature supports dynamic user data management, allowing for a flexible and responsive user experience.
+
+### Admin Endpoints
+
+- **Admin Registration (POST /admin/auth/register)**:
+  - This endpoint is dedicated to the registration of new admin users. It accepts an `AdminRegistrationBody` containing the admin's registration details such as username, email, and password. Successful registration returns the registered admin's details. If an admin with the same identifying information already exists, it throws an `AdminAlreadyExistsException`, leading to an HTTP CONFLICT response. This ensures that each admin is unique within the system.
+
+- **Admin Deletion (DELETE /admin/auth/delete)**:
+  - The deletion endpoint allows for the removal of an admin from the system based on their registration information provided in an `AdminRegistrationBody`. This function is essential for maintaining the integrity and security of the admin panel by allowing the removal of admin accounts when necessary.
+
+- **Retrieve Admin Information (GET /admin/auth/get)**:
+>>>>>>> f1e72ffc0939f20551054eb05b09c9704fc615af
   - This functionality enables the retrieval of admin details. It requires an `AdminRegistrationBody` for identifying the admin whose information is to be fetched. This feature is crucial for admin management and verification purposes, ensuring that admins can access and review their stored information within the system.
 
 - **Update Admin Information (PUT /admin/auth/update)**:
@@ -148,6 +246,7 @@ In the hotel management system, several key endpoints play pivotal roles in faci
 ### Reservation Endpoints
 
 - **Create Reservation (POST /reservation/create)**:
+<<<<<<< HEAD
 
   - This endpoint allows for the creation of new reservations by accepting reservation details through a `ReservationRegistrationBody`. If successful, it returns the created reservation. In case of any conflicts like the hotel or room not existing, appropriate exceptions are thrown.
 
@@ -161,6 +260,17 @@ In the hotel management system, several key endpoints play pivotal roles in faci
 
 - **Update Reservation (PUT /reservation/update/{id})**:
 
+=======
+  - This endpoint allows for the creation of new reservations by accepting reservation details through a `ReservationRegistrationBody`. If successful, it returns the created reservation. In case of any conflicts like the hotel or room not existing, appropriate exceptions are thrown.
+
+- **Delete Reservation (DELETE /reservation/delete/{id})**:
+  - This endpoint deletes a reservation identified by its unique ID. It's crucial for managing bookings and ensuring only valid reservations exist in the system.
+
+- **Fetch Reservation Details (GET /reservation/get/{id})**:
+  - This endpoint retrieves the details of a specific reservation by its ID. It helps both users and admins to view booking information. If the reservation does not exist, a not found response is returned.
+
+- **Update Reservation (PUT /reservation/update/{id})**:
+>>>>>>> f1e72ffc0939f20551054eb05b09c9704fc615af
   - This endpoint updates the details of an existing reservation. It requires the reservation ID and new details in a `ReservationRegistrationBody`. It ensures that booking information remains current and accurate.
 
 - **Fetch All Reservations (GET /reservation/all)**:
@@ -244,12 +354,18 @@ The front-end of the Hotel Booking Project is built using React, a popular JavaS
 #### User Interaction
 
 1. **Registration and Login:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> f1e72ffc0939f20551054eb05b09c9704fc615af
    - Users can register using the `RegisterPage`.
    - They can log in through the `LoginForm`, which redirects them to the homepage upon successful login.
 
 2. **Searching and Booking:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> f1e72ffc0939f20551054eb05b09c9704fc615af
    - Users browse available rooms on the `HomePage`.
    - They select a room and proceed to the `ReservationPage` to complete the booking process.
 
@@ -259,7 +375,10 @@ The front-end of the Hotel Booking Project is built using React, a popular JavaS
 #### Admin Interaction
 
 1. **Admin Dashboard:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> f1e72ffc0939f20551054eb05b09c9704fc615af
    - Admins log in using the `LoginForm` and are redirected to the `AdminPage`.
    - They can manage users and reservations from the dashboard.
 
