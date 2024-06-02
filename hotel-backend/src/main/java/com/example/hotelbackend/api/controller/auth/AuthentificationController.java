@@ -43,6 +43,8 @@ public class AuthentificationController {
         if (user != null && passwordEncoder.matches(loginBody.getPassword(), user.getPassword())) {
             Map<String, String> response = new HashMap<>();
             response.put("role", "USER");
+            response.put("username", user.getUsername());
+
             return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");

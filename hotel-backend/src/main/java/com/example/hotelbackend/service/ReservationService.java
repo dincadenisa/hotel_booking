@@ -10,7 +10,7 @@ import com.example.hotelbackend.model.Reservation;
 import com.example.hotelbackend.model.Room;
 import com.example.hotelbackend.model.User;
 import com.example.hotelbackend.model.dao.ReservationDAO;
-import com.example.hotelbackend.api.model.RegistrationBody;  // Import RegistrationBody
+import com.example.hotelbackend.api.model.RegistrationBody;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -66,6 +66,12 @@ public class ReservationService {
         reservation.setCheckOutDate(reservationBody.getCheckOutDate());
         reservation.setRoom(room.get());
         reservation.setUser(user.get());
+        reservation.setHotel(hotel.get());
+        reservation.setFirstName(reservationBody.getFirstName());
+        reservation.setLastName(reservationBody.getLastName());
+        reservation.setPhoneNumber(reservationBody.getPhoneNumber());
+        reservation.setNumberOfPersons(reservationBody.getNumberOfPersons());
+
         return reservationDAO.save(reservation);
     }
 
@@ -116,6 +122,11 @@ public class ReservationService {
         reservation.setCheckOutDate(registrationBody.getCheckOutDate());
         reservation.setRoom(existingRoom.get());
         reservation.setUser(existingUser.get());
+        reservation.setHotel(existingHotel.get());
+        reservation.setFirstName(registrationBody.getFirstName());
+        reservation.setLastName(registrationBody.getLastName());
+        reservation.setPhoneNumber(registrationBody.getPhoneNumber());
+        reservation.setNumberOfPersons(registrationBody.getNumberOfPersons());
 
         return reservationDAO.save(reservation);
     }

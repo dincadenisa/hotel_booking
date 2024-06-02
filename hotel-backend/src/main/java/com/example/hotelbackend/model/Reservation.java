@@ -27,29 +27,37 @@ public class Reservation {
     @ManyToOne
     private Room room;
 
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
     @ManyToOne
     private Hotel hotel;
 
     @ManyToOne
     private User user;
 
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "number_of_persons", nullable = false)
+    private Integer numberOfPersons;
+
     public Reservation() {
     }
 
-    public Reservation(Date checkInDate, Date checkOutDate, Room room, User user,Hotel hotel) {
+    public Reservation(Date checkInDate, Date checkOutDate, Room room, User user, Hotel hotel, String firstName, String lastName, String phoneNumber, Integer numberOfPersons) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.room = room;
         this.user = user;
-        this.hotel=hotel;
+        this.hotel = hotel;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.numberOfPersons = numberOfPersons;
     }
 
     public Long getId() {
@@ -84,12 +92,52 @@ public class Reservation {
         this.room = room;
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getNumberOfPersons() {
+        return numberOfPersons;
+    }
+
+    public void setNumberOfPersons(Integer numberOfPersons) {
+        this.numberOfPersons = numberOfPersons;
     }
 
     @Override
@@ -99,7 +147,12 @@ public class Reservation {
                 ", checkInDate=" + checkInDate +
                 ", checkOutDate=" + checkOutDate +
                 ", room=" + room +
+                ", hotel=" + hotel +
                 ", user=" + user +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", numberOfPersons=" + numberOfPersons +
                 '}';
     }
 }

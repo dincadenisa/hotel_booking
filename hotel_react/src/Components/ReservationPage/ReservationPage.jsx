@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import './ReservationPage.css'; // Import the CSS file
+import axios from 'axios';
 
 const ReservationPage = () => {
   const { roomId } = useParams();
   const location = useLocation();
+  const room = location.state.room;
+  const user = location.state.username;
   const pricePerNight = location.state.room.pricePerNight;
 
   const [firstName, setFirstName] = useState('');
@@ -22,18 +25,37 @@ const ReservationPage = () => {
     return diffDays * pricePerNight;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Reservation details:', {
-      firstName,
-      lastName,
-      phoneNumber,
-      numberOfPersons,
-      startDate,
-      endDate,
-      totalPrice: calculateTotalPrice(),
-    });
+
+    const reservationDetails = {
+      hotelId: 1, // Replace with actual hotelId if needed
+      roomId: roomId,
+      username: user, // Replace with actual username
+      roomNumber: roomId, // Replace with actual roomNumber
+      checkInDate: startDate,
+      checkOutDate: endDate,
+      guestName: `${firstName} ${lastName}`,
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      numberOfPersons: numberOfPersons,
+    };
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/reservation/create',
+        reservationDetails
+      );
+      if (response.status === 200) {
+        alert('Reservation created successfully!');
+      } else {
+        alert('Failed to create reservation.');
+      }
+    } catch (error) {
+      console.error('Error creating reservation:', error);
+      alert('An error occurred while creating the reservation.');
+    }
   };
 
   return (

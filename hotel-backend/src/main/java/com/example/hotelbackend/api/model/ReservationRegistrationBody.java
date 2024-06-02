@@ -29,6 +29,18 @@ public class ReservationRegistrationBody {
     @NotEmpty
     private String guestName;
 
+    @NotEmpty
+    private String firstName;
+
+    @NotEmpty
+    private String lastName;
+
+    @NotEmpty
+    private String phoneNumber;
+
+    @NotNull
+    private Integer numberOfPersons;
+
     /**
      * Gets the hotel ID.
      * @return The hotel ID.
@@ -49,7 +61,6 @@ public class ReservationRegistrationBody {
         return username;
     }
 
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -59,8 +70,8 @@ public class ReservationRegistrationBody {
     }
 
     /**
-     * Sets the hotel ID.
-     * @param roomId The hotel ID to set.
+     * Sets the room ID.
+     * @param roomId The room ID to set.
      */
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
@@ -128,5 +139,69 @@ public class ReservationRegistrationBody {
      */
     public void setGuestName(String guestName) {
         this.guestName = guestName;
+    }
+
+    /**
+     * Gets the first name.
+     * @return The first name.
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Sets the first name.
+     * @param firstName The first name to set.
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Gets the last name.
+     * @return The last name.
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Sets the last name.
+     * @param lastName The last name to set.
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Gets the phone number.
+     * @return The phone number.
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * Sets the phone number.
+     * @param phoneNumber The phone number to set.
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Gets the number of persons.
+     * @return The number of persons.
+     */
+    public Integer getNumberOfPersons() {
+        return numberOfPersons;
+    }
+
+    /**
+     * Sets the number of persons.
+     * @param numberOfPersons The number of persons to set.
+     */
+    public void setNumberOfPersons(Integer numberOfPersons) {
+        this.numberOfPersons = numberOfPersons;
     }
 }

@@ -1,4 +1,3 @@
-// src/Components/LoginForm/LoginForm.jsx
 import React, { useState } from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from 'react-icons/fa';
@@ -22,7 +21,9 @@ const LoginForm = () => {
       const userResponse = await UserService.login({ username, password });
       if (userResponse.data.role === 'USER') {
         console.log('User login successful, navigating to homepage');
-        navigate('/homepage');
+        console.log(userResponse.data);
+        navigate('/homepage', { state: userResponse.data.username });
+
         return;
       }
     } catch (error) {
@@ -42,6 +43,10 @@ const LoginForm = () => {
     }
 
     alert('Failed to login');
+  };
+
+  const goToRegisterPage = () => {
+    navigate('/register');
   };
 
   return (
@@ -78,7 +83,14 @@ const LoginForm = () => {
         <button type="submit">Login</button>
         <div className="register-link">
           <p>
-            Don't have an account? <a href="#">Register</a>
+            Don't have an account?{' '}
+            <button
+              type="button"
+              onClick={goToRegisterPage}
+              className="register-button"
+            >
+              Register
+            </button>
           </p>
         </div>
       </form>
