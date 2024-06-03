@@ -86,6 +86,35 @@ The Hotel Booking Project is designed to cover a wide range of functionalities, 
 
 In the hotel management system, several key endpoints play pivotal roles in facilitating the operations and interactions between the users and the system. Here's an overview of the endpoints developed and their functionalities:
 ![uml2hotel](https://github.com/dincadenisa/hotel_booking/assets/126794370/85bc0074-a3b4-442f-bf25-9cf08e0ed8a2)
+### Inheritance (Solid Line with Hollow Arrowhead):
+- **AdminRegistrationBody and RegistrationBody**: The solid line with a hollow arrowhead indicates that AdminRegistrationBody inherits from RegistrationBody.
+- **Admin and User**: The solid line with a hollow arrowhead indicates that Admin inherits from User.
+
+### Association (Solid Line):
+- **Reservation to User**: A solid line indicates that a Reservation is associated with a User. This means a reservation is made by a user.
+- **Reservation to Room**: A solid line indicates that a Reservation is associated with a Room. This means a reservation includes details about the room.
+- **Room to Hotel**: A solid line indicates that a Room is associated with a Hotel. This means rooms belong to a hotel.
+
+### Dependency (Dashed Line):
+- **ReservationController to ReservationService**: A dashed line indicates that ReservationController depends on ReservationService. This means the controller uses the service to handle reservation-related requests.
+- **ReservationService to ReservationDAO**: A dashed line indicates that ReservationService depends on ReservationDAO. This means the service uses the DAO to perform database operations related to reservations.
+- **ReservationService to RoomService**: A dashed line indicates that ReservationService depends on RoomService. This indicates collaboration between these services.
+- **ReservationService to UserService**: A dashed line indicates that ReservationService depends on UserService. This means the service uses user-related services.
+- **UserService to UserDAO**: A dashed line indicates that UserService depends on UserDAO. This means the service uses the DAO to perform database operations related to users.
+- **RoomService to RoomDAO**: A dashed line indicates that RoomService depends on RoomDAO. This means the service uses the DAO to perform database operations related to rooms.
+- **HotelService to HotelDAO**: A dashed line indicates that HotelService depends on HotelDAO. This means the service uses the DAO to perform database operations related to hotels.
+- **AdminService to AdminDAO**: A dashed line indicates that AdminService depends on AdminDAO. This means the service uses the DAO to perform database operations related to admins.
+- **AuthenticationController to UserService**: A dashed line indicates that AuthenticationController depends on UserService for handling user authentication.
+- **AdminAuthenticationController to AdminService**: A dashed line indicates that AdminAuthenticationController depends on AdminService for handling admin authentication.
+- **HotelController to HotelService**: A dashed line indicates that HotelController depends on HotelService for handling hotel-related requests.
+- **RoomController to RoomService**: A dashed line indicates that RoomController depends on RoomService for handling room-related requests.
+
+### Aggregation (Solid Line with Hollow Diamond):
+- **Admin to AdminRegistrationBody**: A solid line with a hollow diamond indicates an aggregation relationship. This means Admin may contain multiple AdminRegistrationBody objects.
+
+### Composition (Solid Line with Filled Diamond):
+- **Hotel to Room**: A solid line with a filled diamond indicates a composition relationship. This means a Hotel contains multiple Room objects, and rooms cannot exist without the hotel.
+
 
 ### Hotel Endpoints
 
