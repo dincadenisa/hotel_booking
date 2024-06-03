@@ -81,11 +81,8 @@ The Hotel Booking Project is designed to cover a wide range of functionalities, 
      3. The admin selects a reservation to view detailed information.
      4. The admin can update reservation details or delete the reservation.
      5. The system saves changes and updates the database accordingly.
-
-## Endpoints
-
-In the hotel management system, several key endpoints play pivotal roles in facilitating the operations and interactions between the users and the system. Here's an overview of the endpoints developed and their functionalities:
-![uml2hotel](https://github.com/dincadenisa/hotel_booking/assets/126794370/85bc0074-a3b4-442f-bf25-9cf08e0ed8a2)
+    
+     ![uml2hotel](https://github.com/dincadenisa/hotel_booking/assets/126794370/85bc0074-a3b4-442f-bf25-9cf08e0ed8a2)
 ### Inheritance (Solid Line with Hollow Arrowhead):
 - **AdminRegistrationBody and RegistrationBody**: The solid line with a hollow arrowhead indicates that AdminRegistrationBody inherits from RegistrationBody.
 - **Admin and User**: The solid line with a hollow arrowhead indicates that Admin inherits from User.
@@ -116,6 +113,10 @@ In the hotel management system, several key endpoints play pivotal roles in faci
 - **Hotel to Room**: A solid line with a filled diamond indicates a composition relationship. This means a Hotel contains multiple Room objects, and rooms cannot exist without the hotel.
 
 
+
+## Endpoints
+
+In the hotel management system, several key endpoints play pivotal roles in facilitating the operations and interactions between the users and the system. Here's an overview of the endpoints developed and their functionalities:
 ### Hotel Endpoints
 
 - **Hotel Registration (POST /hotel/register)**:
